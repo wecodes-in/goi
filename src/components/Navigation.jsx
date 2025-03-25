@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Navigation = ({ language, isDarkMode }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const translations = {
     English: ["Home", "About Us", "Employees Corner", "IAS", "Services", "Contact"],
     Hindi: ["होम", "हमारे बारे में", "कर्मचारी कॉर्नर", "आईएएस", "सेवाएं", "संपर्क करें"],
@@ -14,7 +16,10 @@ const Navigation = ({ language, isDarkMode }) => {
             <a
               key={index}
               href="#"
-              className="text-white py-4 px-4 hover:bg-blue-700 transition-colors"
+              className={`text-white py-4 px-4 transition-colors ${
+                activeIndex === index ? "bg-red-500 text-black" : "hover:bg-blue-700"
+              }`}
+              onClick={() => setActiveIndex(index)}
             >
               {item}
             </a>
