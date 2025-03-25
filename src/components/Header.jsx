@@ -9,7 +9,7 @@ import {
     FaPlus,
     FaMinus,
 } from "react-icons/fa";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
+
 
 const Header = ({
     isDarkMode,
