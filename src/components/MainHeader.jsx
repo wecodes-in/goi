@@ -1,72 +1,106 @@
 import React from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 
-const MainHeader = ({
-    isDarkMode,
+const MainHeader = ({ isDarkMode, language, isMenuOpen, setIsMenuOpen }) => {
+  const translations = {
+    English: ["Home", "About Us", "Employees Corner", "IAS", "Services", "Contact"],
+    Hindi: ["होम", "हमारे बारे में", "कर्मचारी कॉर्नर", "आईएएस", "सेवाएं", "संपर्क करें"],
+  };
 
-    isMenuOpen,
-    setIsMenuOpen,
-}) => {
+  return (
+    <div className={`w-full ${isDarkMode ? "bg-gray-800" : "bg-white"} shadow-md z-50`}>
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <img
+              src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/emblem-dark.png"
+              alt="national emblem"
+              className="national_emblem"
+            />
+            <h1 className="logo" role="heading" aria-label="DOPT Logo">
+              <a href="/" title="Home" rel="home" className="header__logo">
+                <strong lang="hi">कार्मिक एवं प्रशिक्षण विभाग</strong>Department of
+                <span>PERSONNEL &amp; TRAINING</span>
+              </a>
+            </h1>
+          </div>
 
+          <div className="hidden md:flex items-center space-x-2">
+            <a
+              className="sw-logo"
+              title="Swachh Bharat, External Link that opens in a new window"
+              href="https://swachhbharatmission.ddws.gov.in/"
+              target="_blank"
+              aria-label="Swachh Bharat"
+            >
+              <img
+                src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/swach-bharat.png"
+                alt="Swachh Bharat"
+                className="swachh_Bharat"
+              />
+            </a>
 
-    return (
-        <div
-            className={`w-full ${isDarkMode ? "bg-gray-800" : "bg-white"
-                } shadow-md z-50`}
-        >
-            <div className="container mx-auto px-4 py-3">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
+            <a
+              title="Mahatma Gandhi 150th birth anniversary, External Link that opens in a new window"
+              href="http://amritmahotsav.nic.in"
+              target="_blank"
+              aria-label="Mahatma Gandhi"
+            >
+              <img
+                src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/AKAM_logo.jpg"
+                alt="Mahatma Gandhi"
+                className="mahatma_gandhi"
+              />
+            </a>
 
-                        <img
-                            src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/emblem-dark.png"
-                            alt="national emblem"
+            <a
+              title="International Year of Cooperatives"
+              href="#"
+              target="_blank"
+              aria-label="International Year of Cooperatives"
+            >
+              <img
+                src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/IYC-Logo.png"
+                alt="International Year of Cooperatives"
+                className="international_year_cooperatives"
+              />
+            </a>
+          </div>
 
-                            className="national_emblem"
-                        />
-                        <h1 className="logo" role="heading" aria-label="DOPT Logo">
-                            <a href="/" title="Home" rel="home" className="header__logo">
-                                <strong lang="hi">कार्मिक एवं प्रशिक्षण विभाग</strong>Department of
-                                <span>PERSONNEL &amp; TRAINING</span>
-                            </a>
-                        </h1>
-                    </div>
-
-                    <div className="hidden md:flex items-center space-x-2">
-
-                        <a className="sw-logo" title="Swachh Bharat, External Link that opens in a new window" href="https://swachhbharatmission.ddws.gov.in/" target="_blank" aria-label="Swachh Bharat">
-                        <img src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/swach-bharat.png"
-                         alt="Swachh Bharat"
-                         className="swachh_Bharat"/>
-                        </a>
-
-                        <a title="Mahatma Gandhi 150th birth anniversary, External Link that opens in a new window" href="http://amritmahotsav.nic.in" target="_blank" aria-label="Mahatma Gandhi">
-                        <img src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/AKAM_logo.jpg"
-                         alt="Mahatma Gandhi"
-                         className="mahatma_gandhi"/>
-                        </a>
-
-                        <a title="International Year of Cooperatives" href="#" target="_blank" aria-label="International Year of Cooperatives">
-                        <img src="https://dopt.gov.in/sites/all/modules/customs/cmf_content/assets/images/IYC-Logo.png" 
-                        alt="International Year of Cooperatives"
-                        className="international_year_cooperatives"/>
-                        </a>
-                      
-
-
-                    </div>
-
-                    <button
-                        className="md:hidden"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {isMenuOpen ? <HiX className="h-6 w-6" /> : <HiMenuAlt3 className="h-6 w-6" />}
-                    </button>
-                </div>
-            </div>
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <HiX className="h-6 w-6" /> : <HiMenuAlt3 className="h-6 w-6" />}
+          </button>
         </div>
-    );
+      </div>
+
+      {isMenuOpen && (
+        <div
+          className={`fixed top-20 left-0 w-full ${
+            isDarkMode ? "bg-gray-800" : "bg-white"
+          } shadow-lg md:hidden z-40`}
+        >
+          <div className="container mx-auto px-4 py-2">
+            {translations[language].map((item, index) => (
+              <a
+                key={index}
+                href="#"
+                className={`block py-2 px-4 rounded ${
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }`}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default MainHeader;
